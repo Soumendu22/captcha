@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <center><h3>Soumendu</h3></center>
+        <div class="row main" style="padding-top:50px;">
+            <div class="main-login main-center">
+                <h5><center>Captcha Demo</center></h5>
+                <p>
+                    {% with messages = get_flashed_messages(with_categories=True) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    <strong>{{ message }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </p>
+                <form method="POST" action="{{ url_for('contact') }}">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <div>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <div>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Enter your Email" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <div>
+                            <textarea class="form-control" name="message" id="message" placeholder="Enter your Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="{{ sitekey }}"></div>
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-primary btn-lg btn-block login-button">
+                </form>
+            </div>
+        </div>
+    </div>
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            margin-bottom: 15px;
+        }
+
+        input,
+        input::-webkit-input-placeholder {
+            font-size: 11px;
+            padding-top: 3px;
+        }
+
+        .main-login {
+            background-color: #f5f5f5;
+            padding: 50px;
+            border-radius: 2px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        span.input-group-addon i {
+            color: #009edf;
+            font-size: 17px;
+            padding: 10px;
+        }
+
+        .form-control {
+            height: auto!important;
+            padding: 8px 12px !important;
+        }
+
+        .input-group {
+            box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+        }
+
+        .main-center {
+            margin-top: 30px;
+            margin: 0 auto;
+            max-width: 400px;
+            padding: 10px 40px;
+            text-shadow: none;
+            box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+        }
+    </style>
+</body>
+</html>
